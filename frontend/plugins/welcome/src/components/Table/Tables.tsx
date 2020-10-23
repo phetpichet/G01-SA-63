@@ -91,6 +91,9 @@ export default function ComponentsTableUser() {
                   <TableCell align="center">
                     <Button
                       onClick={() => {
+                       if (item.id === undefined) {
+                          return;
+                        }
                         deleteUsers(item.id);
                       }}
                       style={{ marginLeft: 10 }}

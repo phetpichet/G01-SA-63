@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * SUT SA Example API
+ * SUT SA Example API Playlist Vidoe
  * This is a sample server for SUT SE 2563
  *
  * The version of the OpenAPI document: 1.0
@@ -13,12 +13,25 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    EntPositionEdges,
+    EntPositionEdgesFromJSON,
+    EntPositionEdgesFromJSONTyped,
+    EntPositionEdgesToJSON,
+} from './';
+
 /**
  * 
  * @export
  * @interface EntPosition
  */
 export interface EntPosition {
+    /**
+     * 
+     * @type {EntPositionEdges}
+     * @memberof EntPosition
+     */
+    edges?: EntPositionEdges;
     /**
      * ID of the ent.
      * @type {number}
@@ -43,6 +56,7 @@ export function EntPositionFromJSONTyped(json: any, ignoreDiscriminator: boolean
     }
     return {
         
+        'edges': !exists(json, 'edges') ? undefined : EntPositionEdgesFromJSON(json['edges']),
         'id': !exists(json, 'id') ? undefined : json['id'],
         'position': !exists(json, 'position') ? undefined : json['position'],
     };
@@ -57,6 +71,7 @@ export function EntPositionToJSON(value?: EntPosition | null): any {
     }
     return {
         
+        'edges': EntPositionEdgesToJSON(value.edges),
         'id': value.id,
         'position': value.position,
     };

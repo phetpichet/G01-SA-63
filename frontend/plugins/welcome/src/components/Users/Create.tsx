@@ -2,7 +2,6 @@ import React, { useEffect, FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import {
   Content,
-  ContentHeader,
 } from '@backstage/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -14,7 +13,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Select from '@material-ui/core/Select';
-import { IconButton, Input, InputAdornment, InputLabel, MenuItem, OutlinedInput } from '@material-ui/core';
+import { IconButton, InputAdornment, InputLabel, MenuItem, OutlinedInput } from '@material-ui/core';
 import { EntTitle } from '../../api/models/EntTitle';
 import { EntPosition } from '../../api/models/EntPosition';
 import { EntGender } from '../../api/models/EntGender';
@@ -59,23 +58,13 @@ const User: FC<{}> = () => {
   const [titles, setTitles] = React.useState<EntTitle[]>([]);
   const [positions, setPositions] = React.useState<EntPosition[]>([]);
   const [genders, setGenders] = React.useState<EntGender[]>([]);
-  const [values, setValues] = React.useState<Partial<user>>({ password: '', showPassword: false, });
-  // const [status, setStatus] = React.useState(false);
-  // const [alert, setAlert] = React.useState(true);
-  // const [loading, setLoading] = React.useState(true);
+ 
 
   const Toast = Swal.mixin({
-    toast: true,
     position: 'center',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: toast => {
-      toast.addEventListener('mouseenter', Swal.stopTimer);
-      toast.addEventListener('mouseleave', Swal.resumeTimer);
-    },
+    showConfirmButton: true,
+    timer: 1500
   });
-
 
   const handleChange = (
     event: React.ChangeEvent<{ name?: string; value: unknown }>,) => {
@@ -83,12 +72,6 @@ const User: FC<{}> = () => {
     const { value } = event.target;
     setUser({ ...user, [name]: value });
     console.log(user);
-  };
-  const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
-  };
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
   };
 
   const getTitles = async () => {
@@ -129,15 +112,14 @@ const User: FC<{}> = () => {
       .then(data => {
         console.log(data);
         if (data.status === true) {
-          clear();
           Toast.fire({
-            icon: 'success',
             title: 'บันทึกข้อมูลสำเร็จ',
+            icon: 'success',
           });
         } else {
           Toast.fire({
-            icon: 'error',
             title: 'บันทึกข้อมูลไม่สำเร็จ',
+            icon: 'error',
           });
         }
       });
@@ -153,10 +135,13 @@ const User: FC<{}> = () => {
           <Button color="inherit" component={RouterLink} to="/"> Login </Button>
         </Toolbar>
       </AppBar>
-      <Content className = {classes.withoutLabel}>
-        <ContentHeader 
-        title="บันทึกข้อมูลเภสัชกร">
-        </ContentHeader>
+      <Content className={classes.withoutLabel}>
+        <Typography variant="h5"
+          className={classes.formControl} style={{
+            marginLeft: 200
+          }}>
+          บันทึกข้อมูลเภสัชกร
+        </Typography>
         <div className={classes.root}>
           <form noValidate autoComplete="off">
             <Grid container spacing={3}>
@@ -253,31 +238,33 @@ const User: FC<{}> = () => {
                 <FormControl className={classes.formControl} variant="outlined">
                   <InputLabel>Password</InputLabel>
                   <OutlinedInput
+                    labelWidth={80}
                     name="password"
                     type={user.showPassword ? 'text' : 'password'}
                     value={user.password}
                     onChange={handleChange}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                        >
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                    labelWidth={85}
                   />
                 </FormControl>
               </Grid>
             </Grid>
-            <div className={classes.formControl}>
+            <div className={classes.formControl} style={{ marginLeft: 200 }}>
               <Button
                 onClick={save}
                 variant="contained"
                 color="primary">
                 SAVE
+             </Button>
+              <Button style={{ marginLeft: 10 }}
+                onClick={clear}
+                variant="contained"
+                color="secondary">
+                CLEAR
+             </Button>
+             <Button style={{ marginLeft: 10 }}
+                component={RouterLink} to="/table"
+                variant="contained"
+                color="secondary">  
+                BACK
              </Button>
             </div>
           </form>

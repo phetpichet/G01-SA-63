@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * SUT SA Example API
+ * SUT SA Example API Playlist Vidoe
  * This is a sample server for SUT SE 2563
  *
  * The version of the OpenAPI document: 1.0
@@ -13,12 +13,25 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    EntUserEdges,
+    EntUserEdgesFromJSON,
+    EntUserEdgesFromJSONTyped,
+    EntUserEdgesToJSON,
+} from './';
+
 /**
  * 
  * @export
  * @interface EntUser
  */
 export interface EntUser {
+    /**
+     * 
+     * @type {EntUserEdges}
+     * @memberof EntUser
+     */
+    edges?: EntUserEdges;
     /**
      * Email holds the value of the "email" field.
      * @type {string}
@@ -55,6 +68,7 @@ export function EntUserFromJSONTyped(json: any, ignoreDiscriminator: boolean): E
     }
     return {
         
+        'edges': !exists(json, 'edges') ? undefined : EntUserEdgesFromJSON(json['edges']),
         'email': !exists(json, 'email') ? undefined : json['email'],
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
@@ -71,6 +85,7 @@ export function EntUserToJSON(value?: EntUser | null): any {
     }
     return {
         
+        'edges': EntUserEdgesToJSON(value.edges),
         'email': value.email,
         'id': value.id,
         'name': value.name,

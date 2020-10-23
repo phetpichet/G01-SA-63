@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * SUT SA Example API
+ * SUT SA Example API Playlist Vidoe
  * This is a sample server for SUT SE 2563
  *
  * The version of the OpenAPI document: 1.0
@@ -13,12 +13,25 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    EntTitleEdges,
+    EntTitleEdgesFromJSON,
+    EntTitleEdgesFromJSONTyped,
+    EntTitleEdgesToJSON,
+} from './';
+
 /**
  * 
  * @export
  * @interface EntTitle
  */
 export interface EntTitle {
+    /**
+     * 
+     * @type {EntTitleEdges}
+     * @memberof EntTitle
+     */
+    edges?: EntTitleEdges;
     /**
      * ID of the ent.
      * @type {number}
@@ -43,6 +56,7 @@ export function EntTitleFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     }
     return {
         
+        'edges': !exists(json, 'edges') ? undefined : EntTitleEdgesFromJSON(json['edges']),
         'id': !exists(json, 'id') ? undefined : json['id'],
         'title': !exists(json, 'title') ? undefined : json['title'],
     };
@@ -57,6 +71,7 @@ export function EntTitleToJSON(value?: EntTitle | null): any {
     }
     return {
         
+        'edges': EntTitleEdgesToJSON(value.edges),
         'id': value.id,
         'title': value.title,
     };

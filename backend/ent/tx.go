@@ -12,14 +12,24 @@ import (
 // Tx is a transactional client that is created by calling Client.Tx().
 type Tx struct {
 	config
+	// Dispense is the client for interacting with the Dispense builders.
+	Dispense *DispenseClient
+	// Drug is the client for interacting with the Drug builders.
+	Drug *DrugClient
+	// Form is the client for interacting with the Form builders.
+	Form *FormClient
 	// Gender is the client for interacting with the Gender builders.
 	Gender *GenderClient
 	// Position is the client for interacting with the Position builders.
 	Position *PositionClient
 	// Title is the client for interacting with the Title builders.
 	Title *TitleClient
+	// Unit is the client for interacting with the Unit builders.
+	Unit *UnitClient
 	// User is the client for interacting with the User builders.
 	User *UserClient
+	// Volume is the client for interacting with the Volume builders.
+	Volume *VolumeClient
 
 	// lazily loaded.
 	client     *Client
@@ -155,10 +165,15 @@ func (tx *Tx) Client() *Client {
 }
 
 func (tx *Tx) init() {
+	tx.Dispense = NewDispenseClient(tx.config)
+	tx.Drug = NewDrugClient(tx.config)
+	tx.Form = NewFormClient(tx.config)
 	tx.Gender = NewGenderClient(tx.config)
 	tx.Position = NewPositionClient(tx.config)
 	tx.Title = NewTitleClient(tx.config)
+	tx.Unit = NewUnitClient(tx.config)
 	tx.User = NewUserClient(tx.config)
+	tx.Volume = NewVolumeClient(tx.config)
 }
 
 // txDriver wraps the given dialect.Tx with a nop dialect.Driver implementation.
@@ -168,7 +183,7 @@ func (tx *Tx) init() {
 // of them in order to commit or rollback the transaction.
 //
 // If a closed transaction is embedded in one of the generated entities, and the entity
-// applies a query, for example: Gender.QueryXXX(), the query will be executed
+// applies a query, for example: Dispense.QueryXXX(), the query will be executed
 // through the driver which created this transaction.
 //
 // Note that txDriver is not goroutine safe.

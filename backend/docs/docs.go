@@ -666,6 +666,11 @@ var doc = `{
         "ent.Gender": {
             "type": "object",
             "properties": {
+                "edges": {
+                    "description": "Edges holds the relations/edges for other nodes in the graph.\nThe values are being populated by the GenderQuery when eager-loading is set.",
+                    "type": "object",
+                    "$ref": "#/definitions/ent.GenderEdges"
+                },
                 "gender": {
                     "description": "Gender holds the value of the \"gender\" field.",
                     "type": "string"
@@ -676,9 +681,26 @@ var doc = `{
                 }
             }
         },
+        "ent.GenderEdges": {
+            "type": "object",
+            "properties": {
+                "users": {
+                    "description": "Users holds the value of the users edge.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ent.User"
+                    }
+                }
+            }
+        },
         "ent.Position": {
             "type": "object",
             "properties": {
+                "edges": {
+                    "description": "Edges holds the relations/edges for other nodes in the graph.\nThe values are being populated by the PositionQuery when eager-loading is set.",
+                    "type": "object",
+                    "$ref": "#/definitions/ent.PositionEdges"
+                },
                 "id": {
                     "description": "ID of the ent.",
                     "type": "integer"
@@ -689,9 +711,26 @@ var doc = `{
                 }
             }
         },
+        "ent.PositionEdges": {
+            "type": "object",
+            "properties": {
+                "users": {
+                    "description": "Users holds the value of the users edge.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ent.User"
+                    }
+                }
+            }
+        },
         "ent.Title": {
             "type": "object",
             "properties": {
+                "edges": {
+                    "description": "Edges holds the relations/edges for other nodes in the graph.\nThe values are being populated by the TitleQuery when eager-loading is set.",
+                    "type": "object",
+                    "$ref": "#/definitions/ent.TitleEdges"
+                },
                 "id": {
                     "description": "ID of the ent.",
                     "type": "integer"
@@ -702,9 +741,26 @@ var doc = `{
                 }
             }
         },
+        "ent.TitleEdges": {
+            "type": "object",
+            "properties": {
+                "users": {
+                    "description": "Users holds the value of the users edge.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ent.User"
+                    }
+                }
+            }
+        },
         "ent.User": {
             "type": "object",
             "properties": {
+                "edges": {
+                    "description": "Edges holds the relations/edges for other nodes in the graph.\nThe values are being populated by the UserQuery when eager-loading is set.",
+                    "type": "object",
+                    "$ref": "#/definitions/ent.UserEdges"
+                },
                 "email": {
                     "description": "Email holds the value of the \"email\" field.",
                     "type": "string"
@@ -720,6 +776,26 @@ var doc = `{
                 "password": {
                     "description": "Password holds the value of the \"password\" field.",
                     "type": "string"
+                }
+            }
+        },
+        "ent.UserEdges": {
+            "type": "object",
+            "properties": {
+                "gender": {
+                    "description": "Gender holds the value of the gender edge.",
+                    "type": "object",
+                    "$ref": "#/definitions/ent.Gender"
+                },
+                "position": {
+                    "description": "Position holds the value of the position edge.",
+                    "type": "object",
+                    "$ref": "#/definitions/ent.Position"
+                },
+                "title": {
+                    "description": "Title holds the value of the title edge.",
+                    "type": "object",
+                    "$ref": "#/definitions/ent.Title"
                 }
             }
         },
@@ -792,7 +868,7 @@ var SwaggerInfo = swaggerInfo{
 	Host:        "localhost:8080",
 	BasePath:    "/api/v1",
 	Schemes:     []string{},
-	Title:       "SUT SA Example API",
+	Title:       "SUT SA Example API Playlist Vidoe",
 	Description: "This is a sample server for SUT SE 2563",
 }
 

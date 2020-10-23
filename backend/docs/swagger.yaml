@@ -2,6 +2,12 @@ basePath: /api/v1
 definitions:
   ent.Gender:
     properties:
+      edges:
+        $ref: '#/definitions/ent.GenderEdges'
+        description: |-
+          Edges holds the relations/edges for other nodes in the graph.
+          The values are being populated by the GenderQuery when eager-loading is set.
+        type: object
       gender:
         description: Gender holds the value of the "gender" field.
         type: string
@@ -9,8 +15,22 @@ definitions:
         description: ID of the ent.
         type: integer
     type: object
+  ent.GenderEdges:
+    properties:
+      users:
+        description: Users holds the value of the users edge.
+        items:
+          $ref: '#/definitions/ent.User'
+        type: array
+    type: object
   ent.Position:
     properties:
+      edges:
+        $ref: '#/definitions/ent.PositionEdges'
+        description: |-
+          Edges holds the relations/edges for other nodes in the graph.
+          The values are being populated by the PositionQuery when eager-loading is set.
+        type: object
       id:
         description: ID of the ent.
         type: integer
@@ -18,8 +38,22 @@ definitions:
         description: Position holds the value of the "position" field.
         type: string
     type: object
+  ent.PositionEdges:
+    properties:
+      users:
+        description: Users holds the value of the users edge.
+        items:
+          $ref: '#/definitions/ent.User'
+        type: array
+    type: object
   ent.Title:
     properties:
+      edges:
+        $ref: '#/definitions/ent.TitleEdges'
+        description: |-
+          Edges holds the relations/edges for other nodes in the graph.
+          The values are being populated by the TitleQuery when eager-loading is set.
+        type: object
       id:
         description: ID of the ent.
         type: integer
@@ -27,8 +61,22 @@ definitions:
         description: Title holds the value of the "title" field.
         type: string
     type: object
+  ent.TitleEdges:
+    properties:
+      users:
+        description: Users holds the value of the users edge.
+        items:
+          $ref: '#/definitions/ent.User'
+        type: array
+    type: object
   ent.User:
     properties:
+      edges:
+        $ref: '#/definitions/ent.UserEdges'
+        description: |-
+          Edges holds the relations/edges for other nodes in the graph.
+          The values are being populated by the UserQuery when eager-loading is set.
+        type: object
       email:
         description: Email holds the value of the "email" field.
         type: string
@@ -41,6 +89,21 @@ definitions:
       password:
         description: Password holds the value of the "password" field.
         type: string
+    type: object
+  ent.UserEdges:
+    properties:
+      gender:
+        $ref: '#/definitions/ent.Gender'
+        description: Gender holds the value of the gender edge.
+        type: object
+      position:
+        $ref: '#/definitions/ent.Position'
+        description: Position holds the value of the position edge.
+        type: object
+      title:
+        $ref: '#/definitions/ent.Title'
+        description: Title holds the value of the title edge.
+        type: object
     type: object
   gin.H:
     additionalProperties: true
@@ -56,7 +119,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: http://swagger.io/terms/
-  title: SUT SA Example API
+  title: SUT SA Example API Playlist Vidoe
   version: "1.0"
 paths:
   /genders:

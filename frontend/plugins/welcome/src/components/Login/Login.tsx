@@ -1,10 +1,11 @@
-import React, { Component, useEffect, useReducer } from 'react';
+import React, { FC, useEffect, useReducer } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import { EntUser } from '../../api/models/EntUser';
+import Swal from 'sweetalert2';
 import {
   // Content,
   Header,
@@ -37,13 +38,13 @@ const useStyles = makeStyles(theme => ({
 
 type State = {
   email: string
-  password:  string
+  password: string
   isButtonDisabled: boolean
   helperText: string
   isError: boolean
 };
 
-const initialState:State = {
+const initialState: State = {
   email: '',
   password: '',
   isButtonDisabled: true,
@@ -60,34 +61,34 @@ type Action = { type: 'setEmail', payload: string }
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
-    case 'setEmail': 
+    case 'setEmail':
       return {
         ...state,
         email: action.payload
       };
-    case 'setPassword': 
+    case 'setPassword':
       return {
         ...state,
         password: action.payload
       };
-    case 'setIsButtonDisabled': 
+    case 'setIsButtonDisabled':
       return {
         ...state,
         isButtonDisabled: action.payload
       };
-    case 'loginSuccess': 
+    case 'loginSuccess':
       return {
         ...state,
         helperText: action.payload,
         isError: false
       };
-    case 'loginFailed': 
+    case 'loginFailed':
       return {
         ...state,
         helperText: action.payload,
         isError: true
       };
-    case 'setIsError': 
+    case 'setIsError':
       return {
         ...state,
         isError: action.payload
@@ -98,15 +99,13 @@ const reducer = (state: State, action: Action): State => {
 const Login = () => {
   const classes = useStyles();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [users, setUsers] = React.useState<EntUser[]>([]);
 
   useEffect(() => {
     if (state.email.trim() && state.password.trim()) {
-     dispatch({
-       type: 'setIsButtonDisabled',
-       payload: false
-       
-     });
+      dispatch({
+        type: 'setIsButtonDisabled',
+        payload: false
+      });
     } else {
       dispatch({
         type: 'setIsButtonDisabled',
@@ -116,10 +115,12 @@ const Login = () => {
   }, [state.email, state.password]);
 
   const handleLogin = () => {
-    if ((users.map(state => (state.email))) && (users.map(state => (state.password)))) {
+    if ((state.email == "somchai@gmail.com" && state.password == "12345") ||
+    (state.email == "wanee@gmail.com" && state.password == "123456")
+  ) {
       dispatch({
         type: 'loginSuccess',
-        payload: 'Login Successfully',    
+        payload: 'Login Successfully'
       });
     } else {
       dispatch({
@@ -135,12 +136,11 @@ const Login = () => {
     }
   };
 
-  const handleEmailChange: React.ChangeEventHandler<HTMLInputElement> =
+  const handleUsernameChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
       dispatch({
         type: 'setEmail',
         payload: event.target.value
-        
       });
     };
 
@@ -164,11 +164,11 @@ const Login = () => {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="email"
             name="email"
             autoComplete="email"
             autoFocus
-            onChange={handleEmailChange}
+            onChange={handleUsernameChange}
             onKeyPress={handleKeyPress}
 
           />
@@ -194,8 +194,10 @@ const Login = () => {
             color="primary"
             className={classes.submit}
             onClick={handleLogin}
-            disabled={state.isButtonDisabled}>  
-            Sign In       
+            disabled={state.isButtonDisabled}
+            href="/home"   
+            >
+            Sign In
           </Button>
           <Grid container>
             <Grid item>

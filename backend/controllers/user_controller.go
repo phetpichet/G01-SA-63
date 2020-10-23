@@ -75,6 +75,7 @@ func (ctl *UserController) CreateUser(c *gin.Context) {
 		Query().
 		Where(gender.IDEQ(int(obj.Gender))).
 		Only(context.Background())
+
 	if err != nil {
 		c.JSON(400, gin.H{
 			"error": "gender not found",

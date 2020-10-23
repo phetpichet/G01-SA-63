@@ -9,45 +9,6 @@ import (
 	"github.com/Piichet-3-/app/ent"
 )
 
-// The DispenseFunc type is an adapter to allow the use of ordinary
-// function as Dispense mutator.
-type DispenseFunc func(context.Context, *ent.DispenseMutation) (ent.Value, error)
-
-// Mutate calls f(ctx, m).
-func (f DispenseFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
-	mv, ok := m.(*ent.DispenseMutation)
-	if !ok {
-		return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.DispenseMutation", m)
-	}
-	return f(ctx, mv)
-}
-
-// The DrugFunc type is an adapter to allow the use of ordinary
-// function as Drug mutator.
-type DrugFunc func(context.Context, *ent.DrugMutation) (ent.Value, error)
-
-// Mutate calls f(ctx, m).
-func (f DrugFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
-	mv, ok := m.(*ent.DrugMutation)
-	if !ok {
-		return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.DrugMutation", m)
-	}
-	return f(ctx, mv)
-}
-
-// The FormFunc type is an adapter to allow the use of ordinary
-// function as Form mutator.
-type FormFunc func(context.Context, *ent.FormMutation) (ent.Value, error)
-
-// Mutate calls f(ctx, m).
-func (f FormFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
-	mv, ok := m.(*ent.FormMutation)
-	if !ok {
-		return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.FormMutation", m)
-	}
-	return f(ctx, mv)
-}
-
 // The GenderFunc type is an adapter to allow the use of ordinary
 // function as Gender mutator.
 type GenderFunc func(context.Context, *ent.GenderMutation) (ent.Value, error)
@@ -87,19 +48,6 @@ func (f TitleFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error
 	return f(ctx, mv)
 }
 
-// The UnitFunc type is an adapter to allow the use of ordinary
-// function as Unit mutator.
-type UnitFunc func(context.Context, *ent.UnitMutation) (ent.Value, error)
-
-// Mutate calls f(ctx, m).
-func (f UnitFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
-	mv, ok := m.(*ent.UnitMutation)
-	if !ok {
-		return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.UnitMutation", m)
-	}
-	return f(ctx, mv)
-}
-
 // The UserFunc type is an adapter to allow the use of ordinary
 // function as User mutator.
 type UserFunc func(context.Context, *ent.UserMutation) (ent.Value, error)
@@ -109,19 +57,6 @@ func (f UserFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error)
 	mv, ok := m.(*ent.UserMutation)
 	if !ok {
 		return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.UserMutation", m)
-	}
-	return f(ctx, mv)
-}
-
-// The VolumeFunc type is an adapter to allow the use of ordinary
-// function as Volume mutator.
-type VolumeFunc func(context.Context, *ent.VolumeMutation) (ent.Value, error)
-
-// Mutate calls f(ctx, m).
-func (f VolumeFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
-	mv, ok := m.(*ent.VolumeMutation)
-	if !ok {
-		return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.VolumeMutation", m)
 	}
 	return f(ctx, mv)
 }

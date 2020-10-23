@@ -3,48 +3,17 @@
 package ent
 
 import (
-	"github.com/Piichet-3-/app/ent/dispense"
-	"github.com/Piichet-3-/app/ent/drug"
-	"github.com/Piichet-3-/app/ent/form"
 	"github.com/Piichet-3-/app/ent/gender"
 	"github.com/Piichet-3-/app/ent/position"
 	"github.com/Piichet-3-/app/ent/schema"
 	"github.com/Piichet-3-/app/ent/title"
-	"github.com/Piichet-3-/app/ent/unit"
 	"github.com/Piichet-3-/app/ent/user"
-	"github.com/Piichet-3-/app/ent/volume"
 )
 
 // The init function reads all schema descriptors with runtime
 // code (default values, validators or hooks) and stitches it
 // to their package variables.
 func init() {
-	dispenseFields := schema.Dispense{}.Fields()
-	_ = dispenseFields
-	// dispenseDescNote is the schema descriptor for note field.
-	dispenseDescNote := dispenseFields[0].Descriptor()
-	// dispense.NoteValidator is a validator for the "note" field. It is called by the builders before save.
-	dispense.NoteValidator = dispenseDescNote.Validators[0].(func(string) error)
-	drugFields := schema.Drug{}.Fields()
-	_ = drugFields
-	// drugDescDrugType is the schema descriptor for DrugType field.
-	drugDescDrugType := drugFields[0].Descriptor()
-	// drug.DrugTypeValidator is a validator for the "DrugType" field. It is called by the builders before save.
-	drug.DrugTypeValidator = drugDescDrugType.Validators[0].(func(string) error)
-	// drugDescStrength is the schema descriptor for Strength field.
-	drugDescStrength := drugFields[1].Descriptor()
-	// drug.DefaultStrength holds the default value on creation for the Strength field.
-	drug.DefaultStrength = drugDescStrength.Default.(string)
-	// drugDescInformation is the schema descriptor for Information field.
-	drugDescInformation := drugFields[2].Descriptor()
-	// drug.DefaultInformation holds the default value on creation for the Information field.
-	drug.DefaultInformation = drugDescInformation.Default.(string)
-	formFields := schema.Form{}.Fields()
-	_ = formFields
-	// formDescFormType is the schema descriptor for FormType field.
-	formDescFormType := formFields[0].Descriptor()
-	// form.FormTypeValidator is a validator for the "FormType" field. It is called by the builders before save.
-	form.FormTypeValidator = formDescFormType.Validators[0].(func(string) error)
 	genderFields := schema.Gender{}.Fields()
 	_ = genderFields
 	// genderDescGender is the schema descriptor for gender field.
@@ -63,12 +32,6 @@ func init() {
 	titleDescTitle := titleFields[0].Descriptor()
 	// title.TitleValidator is a validator for the "title" field. It is called by the builders before save.
 	title.TitleValidator = titleDescTitle.Validators[0].(func(string) error)
-	unitFields := schema.Unit{}.Fields()
-	_ = unitFields
-	// unitDescUnitType is the schema descriptor for UnitType field.
-	unitDescUnitType := unitFields[0].Descriptor()
-	// unit.UnitTypeValidator is a validator for the "UnitType" field. It is called by the builders before save.
-	unit.UnitTypeValidator = unitDescUnitType.Validators[0].(func(string) error)
 	userFields := schema.User{}.Fields()
 	_ = userFields
 	// userDescName is the schema descriptor for name field.
@@ -83,10 +46,4 @@ func init() {
 	userDescPassword := userFields[2].Descriptor()
 	// user.PasswordValidator is a validator for the "password" field. It is called by the builders before save.
 	user.PasswordValidator = userDescPassword.Validators[0].(func(string) error)
-	volumeFields := schema.Volume{}.Fields()
-	_ = volumeFields
-	// volumeDescVolumeType is the schema descriptor for VolumeType field.
-	volumeDescVolumeType := volumeFields[0].Descriptor()
-	// volume.VolumeTypeValidator is a validator for the "VolumeType" field. It is called by the builders before save.
-	volume.VolumeTypeValidator = volumeDescVolumeType.Validators[0].(func(string) error)
 }

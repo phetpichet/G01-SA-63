@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/Piichet-3-/app/ent"
-	"github.com/Piichet-3-/app/ent/gender"
-	"github.com/Piichet-3-/app/ent/position"
-	"github.com/Piichet-3-/app/ent/title"
-	"github.com/Piichet-3-/app/ent/user"
+	"github.com/Piichet/app/ent"
+	"github.com/Piichet/app/ent/gender"
+	"github.com/Piichet/app/ent/position"
+	"github.com/Piichet/app/ent/title"
+	"github.com/Piichet/app/ent/user"
 	"github.com/gin-gonic/gin"
 )
 

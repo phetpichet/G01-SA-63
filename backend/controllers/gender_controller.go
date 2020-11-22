@@ -3,8 +3,8 @@ package controllers
 import (
 	"context"
 	"strconv"
-	"github.com/Piichet-3-/app/ent"
-	"github.com/Piichet-3-/app/ent/gender"
+	"github.com/Piichet/app/ent"
+	"github.com/Piichet/app/ent/gender"
 	"github.com/gin-gonic/gin"
 )
 

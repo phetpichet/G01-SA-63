@@ -4,8 +4,8 @@ import (
 	"context"
 	"strconv"
 
-	"github.com/Piichet-3-/app/ent"
-	"github.com/Piichet-3-/app/ent/position"
+	"github.com/Piichet/app/ent"
+	"github.com/Piichet/app/ent/position"
 	"github.com/gin-gonic/gin"
 )
 

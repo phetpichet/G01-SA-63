@@ -4,9 +4,9 @@ import (
    "context"
    "log"
  
-   "github.com/Piichet-3-/app/controllers"
-   _ "github.com/Piichet-3-/app/docs"
-   "github.com/Piichet-3-/app/ent"
+   "github.com/Piichet/app/controllers"
+   _ "github.com/Piichet/app/docs"
+   "github.com/Piichet/app/ent"
    "github.com/gin-contrib/cors"
    "github.com/gin-gonic/gin"
    _ "github.com/mattn/go-sqlite3"
